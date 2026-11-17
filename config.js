@@ -1,9 +1,6 @@
-// Copy this file to config.js and fill in your Supabase project values.
-// The anon/publishable key is designed for browser use. Database and Storage
-// security must be enforced by RLS policies in Supabase (see supabase-setup.sql).
 window.APP_CONFIG = {
-  SUPABASE_URL: "https://YOUR_PROJECT_REF.supabase.co",
-  SUPABASE_ANON_KEY: "YOUR_SUPABASE_ANON_OR_PUBLISHABLE_KEY",
+  SUPABASE_URL: "https://ewgyeszjlgpntzlnvyte.supabase.co/rest/v1/"
+  SUPABASE_ANON_KEY: "sb_publishable_JB7S50PY10VvKZPT4e46_A_CBZpgj3_",
   PHOTO_BUCKET: "birthday-photos",
   PHOTO_FOLDER: "shared",
   SIGNED_URL_SECONDS: 3600
