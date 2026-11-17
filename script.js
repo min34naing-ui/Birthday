@@ -17,7 +17,7 @@
     return;
   }
 
-  const loginButton = loginForm.querySelector("button");
+  const loginButton = loginForm.querySelector("button")
 
   if (
     !window.supabase ||
@@ -147,6 +147,8 @@
         uploaded++;
       } catch (err) {
         console.error("Photo upload error:", err);
+        uploadStatus.textContent="Upload Error:"+
+          err.massage;
         failed++;
       }
     }
