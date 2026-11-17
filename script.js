@@ -162,7 +162,7 @@
       uploadStatus.textContent = "ပုံ " + uploaded + " ပုံ တင်ပြီးပါပြီ။ ♡";
     } else {
       uploadStatus.textContent =
-        uploaded + " ပုံ တင်ပြီး၊ " + failed + " ပုံ မအောင်မြင်ပါ။";
+        uploaded + " ပုံ တင်ပြီး၊ " + failed + " ပုံ မအောင်မြင်ပါ။ အကြောင်းရင်း"+up,loadError;
     }
 
     await loadGallery();
