@@ -148,6 +148,7 @@
         uploaded++;
       } catch (err) {
         console.error("Photo upload error:", err);
+        uploadError=err.message//String(err);
         uploadStatus.textContent="Upload Error:"+
           err.massage;
         failed++;
