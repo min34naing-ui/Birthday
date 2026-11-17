@@ -7,7 +7,11 @@
   const gallery = document.getElementById("gallery");
   const galleryMessage = document.getElementById("gallery-message");
   const logoutButton = document.getElementById("logout-btn");
-
+const recoveryPanel = document.getElementById("recovery-panel");
+const newPassword = document.getElementById("new-password");
+const confirmPassword = document.getElementById("confirm-password");
+const updatePasswordButton = document.getElementById("update-password-btn");
+const recoveryMessage = document.getElementById("recovery-message");
   if (!window.supabase || !cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY ||
       cfg.SUPABASE_URL.includes("YOUR_PROJECT") || cfg.SUPABASE_ANON_KEY.includes("YOUR_")) {
     loginMessage.textContent = "Setup မပြီးသေးပါ။ config.js ထဲမှာ Supabase URL နဲ့ anon key ထည့်ပါ။";
@@ -22,6 +26,11 @@
   function showLogin() {
     loginView.classList.remove("hidden");
     birthdayView.classList.add("hidden");
+  }  const isRecovery = window.location.hash.includes("type=recovery");
+
+  if (isRecovery) {
+    recoveryPanel.classList.remove("hidden");
+    loginForm.classList.add("hidden");
   }
   function showBirthday() {
     loginView.classList.add("hidden");
@@ -126,7 +135,38 @@
     showLogin();
     loginMessage.textContent = "လုံခြုံစွာ Log out လုပ်ပြီးပါပြီ။";
   });
+updatePasswordButton.addEventListener("click", async () => {
+  const password = newPassword.value;
+  const confirm = confirmPassword.value;
 
+  if (password.length < 12) {
+    recoveryMessage.textContent = "Password အနည်းဆုံး 12 လုံး ထည့်ပါ။";
+    return;
+  }
+
+  if (password !== confirm) {
+    recoveryMessage.textContent = "Password နှစ်ခု မတူပါဘူး။";
+    return;
+  }
+
+  updatePasswordButton.disabled = true;
+  recoveryMessage.textContent = "Password ပြောင်းနေပါတယ်...";
+
+  const { error } = await client.auth.updateUser({
+    password: password
+  });
+
+  updatePasswordButton.disabled = false;
+
+  if (error) {
+    recoveryMessage.textContent = error.message;
+    return;
+  }
+
+  recoveryMessage.textContent = "Password အသစ် ပြောင်းပြီးပါပြီ။ ❤️";
+  newPassword.value = "";
+  confirmPassword.value = "";
+});
   client.auth.getSession().then(async ({ data }) => {
     if (data.session?.user) await enterApp(data.session.user);
   });
