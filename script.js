@@ -119,6 +119,7 @@
 
     let uploaded = 0;
     let failed = 0;
+    let uploadError="";
 
     for (const file of files) {
       if (!file.type.startsWith("image/")) {
