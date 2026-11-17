@@ -16,13 +16,13 @@
   const recoveryMessage = document.getElementById("recovery-message");
 
   const isRecovery = window.location.hash.includes("type=recovery");
+  let recoverySessionReady = false;
 
   if (!window.supabase || !cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY ||
       cfg.SUPABASE_URL.includes("YOUR_PROJECT") ||
       cfg.SUPABASE_ANON_KEY.includes("YOUR_")) {
     loginMessage.textContent =
       "Setup မပြီးသေးပါ။ config.js ထဲမှာ Supabase URL နဲ့ anon key ထည့်ပါ။";
-    loginForm.querySelector("button").disabled = true;
     return;
   }
 
@@ -33,7 +33,7 @@
       auth: {
         persistSession: true,
         autoRefreshToken: true,
-        detectSessionInUrl: true
+        detectSessionInUrl: false
       }
     }
   );
@@ -46,10 +46,6 @@
   function showBirthday() {
     loginView.classList.add("hidden");
     birthdayView.classList.remove("hidden");
-  }
-
-  if (isRecovery && recoveryPanel) {
-    recoveryPanel.classList.remove("hidden");
   }
 
   async function isApproved(userId) {
@@ -157,6 +153,66 @@
     }
   }
 
+  // Recovery Link ထဲက Session ကို ကိုယ်တိုင်ရယူခြင်း
+  async function initializeRecovery() {
+    if (!isRecovery) return;
+
+    showLogin();
+
+    if (!recoveryPanel || !updatePasswordButton) {
+      console.error("Recovery HTML elements မတွေ့ပါ။");
+      return;
+    }
+
+    recoveryPanel.classList.remove("hidden");
+    updatePasswordButton.disabled = true;
+    recoveryMessage.textContent = "Recovery Session ရယူနေပါတယ်...";
+
+    try {
+      const params = new URLSearchParams(
+        window.location.hash.substring(1)
+      );
+
+      const accessToken = params.get("access_token");
+      const refreshToken = params.get("refresh_token");
+
+      if (!accessToken || !refreshToken) {
+        recoveryMessage.textContent =
+          "Recovery Link မပြည့်စုံပါ။ Email အသစ်တောင်းရန် လိုအပ်နိုင်ပါတယ်။";
+        return;
+      }
+
+      const { data, error } = await client.auth.setSession({
+        access_token: accessToken,
+        refresh_token: refreshToken
+      });
+
+      if (error || !data.session) {
+        recoveryMessage.textContent =
+          "Session ရယူမရပါ။ Recovery Link အသစ်တောင်းရန် လိုအပ်ပါတယ်။";
+        console.error(error);
+        return;
+      }
+
+      recoverySessionReady = true;
+      updatePasswordButton.disabled = false;
+
+      recoveryMessage.textContent =
+        "Password အသစ် သတ်မှတ်နိုင်ပါပြီ ❤️";
+
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+
+    } catch (err) {
+      recoveryMessage.textContent =
+        "Session ရယူရာမှာ အမှားဖြစ်နေပါတယ်။ Link အသစ်တောင်းကြည့်ပါ။";
+      console.error(err);
+    }
+  }
+
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -198,6 +254,12 @@
       const password = newPassword.value;
       const confirm = confirmPassword.value;
 
+      if (!recoverySessionReady) {
+        recoveryMessage.textContent =
+          "Recovery Session မရသေးပါ။ Email Link ကို ပြန်စစ်ပါ။";
+        return;
+      }
+
       if (password.length < 12) {
         recoveryMessage.textContent =
           "Password အနည်းဆုံး 12 လုံး ထည့်ပါ။";
@@ -211,21 +273,9 @@
       }
 
       updatePasswordButton.disabled = true;
-      recoveryMessage.textContent = "Session စစ်ဆေးနေပါတယ်...";
+      recoveryMessage.textContent = "Password ပြောင်းနေပါတယ်...";
 
       try {
-        const { data: sessionData, error: sessionError } =
-          await client.auth.getSession();
-
-        if (sessionError || !sessionData.session) {
-          recoveryMessage.textContent =
-            "Recovery Session မရသေးပါ။ Email အသစ်ထဲက Link ကို ပြန်ဖွင့်ပါ။";
-          updatePasswordButton.disabled = false;
-          return;
-        }
-
-        recoveryMessage.textContent = "Password ပြောင်းနေပါတယ်...";
-
         const { error } = await client.auth.updateUser({
           password: password
         });
@@ -241,32 +291,27 @@
 
         newPassword.value = "";
         confirmPassword.value = "";
-        updatePasswordButton.disabled = false;
 
       } catch (err) {
-        recoveryMessage.textContent= err.message;
+        recoveryMessage.textContent = err.message;
         updatePasswordButton.disabled = false;
       }
     });
   }
 
-  client.auth.getSession().then(async ({ data }) => {
-    if (!isRecovery && data.session?.user) {
-      await enterApp(data.session.user);
+  client.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" && !isRecovery) {
+      showLogin();
     }
   });
 
-  client.auth.onAuthStateChange((event, session) => {
-  if (event === "PASSWORD_RECOVERY" && session) {
-    recoveryPanel.classList.remove("hidden");
-    loginView.classList.remove("hidden");
-    birthdayView.classList.add("hidden");
-    recoveryMessage.textContent = "Password အသစ် သတ်မှတ်နိုင်ပါပြီ ❤️";
-    updatePasswordButton.disabled = false;
+  if (isRecovery) {
+    initializeRecovery();
+  } else {
+    client.auth.getSession().then(async ({ data, error }) => {
+      if (!error && data.session?.user) {
+        await enterApp(data.session.user);
+      }
+    });
   }
-
-  if (event === "SIGNED_OUT" || !session) {
-    if (!isRecovery) showLogin();
-  }
-});
 })();
