@@ -246,7 +246,7 @@
         console.error("Login error:", result.error);
 
         loginMessage.textContent =
-          "Email သို့မဟုတ် Password မှားနေပါတယ်။ ပြန်စစ်ကြည့်ပါ။";
+          "Login Error"+result.error.message;
 
         return;
       }
