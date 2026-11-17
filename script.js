@@ -257,8 +257,16 @@
   });
 
   client.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_OUT" || !session) {
-      if (!isRecovery) showLogin();
-    }
-  });
+  if (event === "PASSWORD_RECOVERY" && session) {
+    recoveryPanel.classList.remove("hidden");
+    loginView.classList.remove("hidden");
+    birthdayView.classList.add("hidden");
+    recoveryMessage.textContent = "Password အသစ် သတ်မှတ်နိုင်ပါပြီ ❤️";
+    updatePasswordButton.disabled = false;
+  }
+
+  if (event === "SIGNED_OUT" || !session) {
+    if (!isRecovery) showLogin();
+  }
+});
 })();
