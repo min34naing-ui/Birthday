@@ -464,3 +464,236 @@ footer span { color: var(--pink); }
   .private-pill { font-size: 8px; letter-spacing: 1px; }
   .gallery { grid-template-columns: 1fr 1fr; }
 }
+/* ===== EXTRA ROMANTIC SURPRISES ===== */
+
+.extra-section {
+  padding: 65px 5% 15px;
+}
+
+.extra-card {
+  max-width: 650px;
+  margin: 28px auto 0;
+  padding: 35px 25px;
+  background: rgba(255,255,255,.85);
+  border: 1px solid #f3dce5;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px #a45c7612;
+}
+
+.extra-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.extra-card h2 {
+  color: var(--deep);
+  font-size: 29px;
+  margin: 10px 0;
+}
+
+.extra-card > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.extra-btn {
+  max-width: 280px;
+}
+
+.extra-message {
+  min-height: 22px;
+  color: #b4778d;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+
+/* Birthday cake */
+
+.birthday-cake {
+  width: 190px;
+  margin: 45px auto 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.cake-bottom,
+.cake-middle,
+.cake-top {
+  width: 100%;
+  border-radius: 12px 12px 18px 18px;
+  position: relative;
+  box-shadow: 0 5px 10px #a45c7620;
+}
+
+.cake-bottom {
+  height: 48px;
+  background: linear-gradient(90deg,#d7799a,#f5afc5,#d7799a);
+}
+
+.cake-middle {
+  width: 88%;
+  height: 42px;
+  background: linear-gradient(90deg,#f6c2d2,#fff0f5,#e9a4ba);
+}
+
+.cake-top {
+  width: 76%;
+  height: 35px;
+  background: #ffe0eb;
+  border-radius: 15px 15px 8px 8px;
+}
+
+.candle {
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.candle-stick {
+  width: 9px;
+  height: 32px;
+  background: repeating-linear-gradient(
+    45deg,#fff 0 4px,#d7799a 4px 7px
+  );
+  border-radius: 4px;
+}
+
+.flame {
+  font-size: 20px;
+  height: 22px;
+  animation: flameDance .5s infinite alternate;
+}
+
+.flame.blown {
+  visibility: hidden;
+}
+
+@keyframes flameDance {
+  from { transform: scale(.9) rotate(-5deg); }
+  to { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Scratch card */
+
+.scratch-area {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 190px;
+  margin: 25px auto 10px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff0f5;
+  touch-action: none;
+}
+
+.scratch-reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg,#fff0f5,#ffe1eb);
+}
+
+.scratch-reveal span {
+  font-size: 30px;
+  color: var(--pink);
+}
+
+.scratch-reveal h3 {
+  font-family: "Noto Sans Myanmar",sans-serif;
+  font-size: 15px;
+  color: var(--deep);
+  line-height: 1.9;
+}
+
+.scratch-reveal p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* Love quiz */
+
+.quiz-progress {
+  color: #c17d96;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-top: 25px;
+}
+
+#quiz-question {
+  color: var(--deep);
+  font-family: "Noto Sans Myanmar",sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  margin: 20px 0;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 12px;
+  max-width: 430px;
+  margin: auto;
+}
+
+.quiz-option {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #f0d6e0;
+  border-radius: 14px;
+  background: #fff9fb;
+  color: var(--deep);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.quiz-option:hover {
+  background: #ffe8f0;
+  border-color: #d98aa5;
+  transform: translateY(-2px);
+}
+
+.quiz-option:disabled {
+  opacity: .65;
+  cursor: default;
+  transform: none;
+}
+
+@media(max-width:600px) {
+  .extra-section {
+    padding: 50px 0 10px;
+  }
+
+  .extra-card {
+    padding: 28px 18px;
+  }
+
+  .birthday-cake {
+    transform: scale(.9);
+    margin: 35px auto 20px;
+  }
+
+  .scratch-area {
+    height: 175px;
+  }
+}
