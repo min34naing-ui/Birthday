@@ -71,7 +71,99 @@
         <button id="music-btn" class="primary-btn music-btn" type="button">▶ Play birthday song</button>
         <p id="music-message" class="tiny-note">သီချင်းဖွင့်ရန် Play ကိုနှိပ်ပါနော် ♡</p >
       </section>
+      <!-- Birthday Cake Surprise -->
+      <section class="extra-section cake-surprise" id="cake-surprise">
+        <div class="section-heading">
+          <span class="eyebrow">MAKE A WISH</span>
+          <span class="line"></span>
+        </div>
 
+        <div class="extra-card center">
+          <div class="extra-icon">🎂</div>
+          <h2>Make a wish, lovely!</h2>
+          <p>မွေးနေ့ဆုတောင်းလေးတစ်ခု တောင်းလိုက်နော်။ ♡</p >
+
+          <div class="birthday-cake">
+            <div class="candle">
+              <span class="flame" id="cake-flame">🔥</span>
+              <span class="candle-stick"></span>
+            </div>
+            <div class="cake-top"></div>
+            <div class="cake-middle"></div>
+            <div class="cake-bottom"></div>
+          </div>
+
+          <button class="primary-btn extra-btn" id="blow-candle-btn" type="button">
+            Blow the candles ♡
+          </button>
+          <p id="cake-message" class="extra-message">
+            ဖယောင်းတိုင်လေးကို မီးမှုတ်လိုက်ပါနော်။
+          </p >
+        </div>
+      </section>
+
+      <!-- Scratch to Reveal -->
+      <section class="extra-section">
+        <div class="section-heading">
+          <span class="eyebrow">A SECRET FOR YOU</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="extra-card center">
+          <div class="extra-icon">💌</div>
+          <h2>A little secret message</h2>
+          <p>အောက်က ပန်းရောင်ကတ်လေးကို ခြစ်ကြည့်ပါနော်။ ♡</p >
+
+          <div class="scratch-area" id="scratch-area">
+            <div class="scratch-reveal">
+              <span>♡</span>
+              <h3>မက ကိုယ့်အတွက် အရမ်းတန်ဖိုးရှိတဲ့သူပါ။</h3>
+              <p>အမြဲတမ်း ပျော်ရွှင်နေပါစေနော်။ ♡</p >
+            </div>
+            <canvas id="scratch-canvas"></canvas>
+          </div>
+          <button class="quiet-btn" id="scratch-reset" type="button">
+            Try again ♡
+          </button>
+          <p class="extra-message">လက်ချောင်းနဲ့ ပွတ်ခြစ်ကြည့်ပါ။</p >
+        </div>
+      </section>
+
+      <!-- Love Quiz -->
+      <section class="extra-section">
+        <div class="section-heading">
+          <span class="eyebrow">JUST FOR US</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="extra-card center" id="love-quiz">
+          <div class="extra-icon">💗</div>
+          <h2>A little love quiz</h2>
+          <p>ကိုယ်တို့နှစ်ယောက်အကြောင်း မေးခွန်းလေးတွေ ဖြေကြည့်ရအောင်။</p >
+
+          <div id="quiz-content">
+            <p class="quiz-progress" id="quiz-progress">Question 1 of 3</p >
+            <h3 id="quiz-question">ကိုယ့်အတွက် အချစ်ဆုံးအရာက ဘာလဲ။</h3>
+
+            <div class="quiz-options" id="quiz-options">
+              <button class="quiz-option" type="button" data-answer="wrong">ပန်းလေးတွေ 🌸</button>
+              <button class="quiz-option" type="button" data-answer="correct">မရဲ့အပြုံးလေး ♡</button>
+              <button class="quiz-option" type="button" data-answer="wrong">ချောကလက် 🍫</button>
+            </div>
+
+            <p class="extra-message" id="quiz-feedback"></p >
+          </div>
+
+          <div id="quiz-result" class="hidden">
+            <div class="extra-icon">🥰</div>
+            <h3>မက အမြဲတမ်း အထူးဆုံးပါ။</h3>
+            <p>ဒီမေးခွန်းလေးတွေထက် မကို ပိုချစ်ပါတယ်။ ♡</p >
+            <button class="primary-btn extra-btn" id="quiz-restart" type="button">
+              Play again ♡
+            </button>
+          </div>
+        </div>
+      </section>
       <section class="letter-section">
         <div class="section-heading">
           <span class="eyebrow">A BIRTHDAY WISH FOR YOU</span>
