@@ -410,6 +410,21 @@
       scratchReset.addEventListener("click", () => {
         scratchCanvas.style.opacity = "1";
         setupScratch();
+            const birthdayView = document.getElementById("birthday-view");
+
+    if (birthdayView) {
+      const observer = new MutationObserver(() => {
+        if (!birthdayView.classList.contains("hidden")) {
+          requestAnimationFrame(setupScratch);
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(birthdayView, {
+        attributes: true,
+        attributeFilter: ["class"]
+      });
+    }
       });
     }
 
