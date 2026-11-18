@@ -307,4 +307,203 @@
       showLogin();
     }
   });
+    // ===== BIRTHDAY CAKE SURPRISE =====
+
+  const blowButton = document.getElementById("blow-candle-btn");
+  const cakeFlame = document.getElementById("cake-flame");
+  const cakeMessage = document.getElementById("cake-message");
+
+  if (blowButton && cakeFlame && cakeMessage) {
+    blowButton.addEventListener("click", () => {
+      cakeFlame.classList.add("blown");
+      cakeMessage.textContent =
+        "ဆုတောင်းလေးတွေ အားလုံး ပြည့်ဝပါစေနော်။ Happy Birthday! 🎉💕";
+      blowButton.textContent = "Wish made! ♡";
+      blowButton.disabled = true;
+
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("span");
+        heart.textContent = ["💗", "💕", "✨", "🌸"][
+          Math.floor(Math.random() * 4)
+        ];
+        heart.className = "cake-heart";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDelay = Math.random() * 1.5 + "s";
+        document.getElementById("cake-surprise").appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3500);
+      }
+    });
+  }
+
+  // ===== SCRATCH TO REVEAL =====
+
+  const scratchCanvas = document.getElementById("scratch-canvas");
+  const scratchReset = document.getElementById("scratch-reset");
+
+  if (scratchCanvas) {
+    const ctx = scratchCanvas.getContext("2d");
+    let scratching = false;
+    let lastScratch = 0;
+
+    function setupScratch() {
+      const rect = scratchCanvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+
+      scratchCanvas.width = rect.width * ratio;
+      scratchCanvas.height = rect.height * ratio;
+
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.globalCompositeOperation = "source-over";
+
+      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+      gradient.addColorStop(0, "#e7a1b9");
+      gradient.addColorStop(1, "#c66b8d");
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, rect.width, rect.height);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 17px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Scratch here ♡", rect.width / 2, rect.height / 2);
+
+      ctx.globalCompositeOperation = "destination-out";
+      lastScratch = 0;
+    }
+
+    function scratchAt(event) {
+      const rect = scratchCanvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 19, 0, Math.PI * 2);
+      ctx.fill();
+
+      lastScratch++;
+      if (lastScratch > 35) {
+        scratchCanvas.style.opacity = "0";
+        scratchCanvas.style.transition = "opacity .5s";
+      }
+    }
+
+    scratchCanvas.addEventListener("pointerdown", event => {
+      scratching = true;
+      scratchCanvas.setPointerCapture(event.pointerId);
+      scratchAt(event);
+    });
+
+    scratchCanvas.addEventListener("pointermove", event => {
+      if (scratching) scratchAt(event);
+    });
+
+    scratchCanvas.addEventListener("pointerup", () => {
+      scratching = false;
+    });
+
+    scratchCanvas.addEventListener("pointercancel", () => {
+      scratching = false;
+    });
+
+    if (scratchReset) {
+      scratchReset.addEventListener("click", () => {
+        scratchCanvas.style.opacity = "1";
+        setupScratch();
+      });
+    }
+
+    setupScratch();
+  }
+
+  // ===== LOVE QUIZ =====
+
+  const quizQuestions = [
+    {
+      question: "ကိုယ့်အတွက် အချစ်ဆုံးအရာက ဘာလဲ။",
+      options: ["ပန်းလေးတွေ 🌸", "မရဲ့အပြုံးလေး ♡", "ချောကလက် 🍫"],
+      correct: 1
+    },
+    {
+      question: "မကို ဘယ်လောက်ချစ်လဲ။",
+      options: ["နည်းနည်းလေး", "အများကြီး ♡", "အတိုင်းအဆမရှိ 💗"],
+      correct: 2
+    },
+    {
+      question: "မအတွက် ကိုယ်ဆန္ဒအရှိဆုံးအရာက ဘာလဲ။",
+      options: [
+        "ပျော်ရွှင်မှုတွေနဲ့ ပြည့်နေဖို့ 🌷",
+        "အိပ်မက်တွေ အောင်မြင်ဖို့ ✨",
+        "အဲဒီနှစ်ခုလုံး 💕"
+      ],
+      correct: 2
+    }
+  ];
+
+  const quizQuestion = document.getElementById("quiz-question");
+  const quizOptions = document.getElementById("quiz-options");
+  const quizProgress = document.getElementById("quiz-progress");
+  const quizFeedback = document.getElementById("quiz-feedback");
+  const quizContent = document.getElementById("quiz-content");
+  const quizResult = document.getElementById("quiz-result");
+  const quizRestart = document.getElementById("quiz-restart");
+
+  let currentQuestion = 0;
+
+  function showQuizQuestion() {
+    if (!quizQuestion || !quizOptions) return;
+
+    const item = quizQuestions[currentQuestion];
+
+    quizProgress.textContent =
+      `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
+
+    quizQuestion.textContent = item.question;
+    quizOptions.innerHTML = "";
+    quizFeedback.textContent = "";
+
+    item.options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "quiz-option";
+      button.textContent = option;
+
+      button.addEventListener("click", () => {
+        if (index === item.correct) {
+          quizFeedback.textContent = "အဖြေမှန်တယ်နော်။ အရမ်းတော်တယ်! 💗";
+        } else {
+          quizFeedback.textContent = "အဖြေမှားသွားတယ်။ နောက်တစ်ခါ စမ်းကြည့်နော်။ ♡";
+        }
+
+        const buttons = quizOptions.querySelectorAll("button");
+        buttons.forEach(btn => btn.disabled = true);
+
+        setTimeout(() => {
+          currentQuestion++;
+
+          if (currentQuestion >= quizQuestions.length) {
+            quizContent.classList.add("hidden");
+            quizResult.classList.remove("hidden");
+          } else {
+            showQuizQuestion();
+          }
+        }, 1200);
+      });
+
+      quizOptions.appendChild(button);
+    });
+  }
+
+  if (quizQuestion && quizOptions) {
+    showQuizQuestion();
+  }
+
+  if (quizRestart) {
+    quizRestart.addEventListener("click", () => {
+      currentQuestion = 0;
+      quizResult.classList.add("hidden");
+      quizContent.classList.remove("hidden");
+      showQuizQuestion();
+    });
+  }
 })();
