@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="my">
 <head>
@@ -11,87 +12,119 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="Home"><span class="brand-heart">♥</span> little moments</a>
+      <a class="brand" href=" "><span class="brand-heart">♥</span> little moments</a >
       <span class="private-pill"><span class="lock-dot">●</span> PRIVATE SPACE</span>
     </header>
 
     <section id="login-view" class="login-view">
-      <div id="recovery-panel" class="hidden">
-  <h2>Set New Password ♡</h2>
-  <label for="new-password">New Password</label>
-  <input id="new-password" type="password"
-    placeholder="New password" required>
-  <label for="confirm-password">Confirm Password</label>
-  <input id="confirm-password" type="password"
-    placeholder="Confirm password" required>
-  <button id="update-password-btn" class="primary-btn"
-    type="button">Update Password ♡</button>
-  <p id="recovery-message" class="form-message"></p>
-</div>
       <div class="hero-copy">
-        <p class="eyebrow">A LITTLE SURPRISE, MADE WITH LOVE</p>
+        <p class="eyebrow">A LITTLE SURPRISE, MADE WITH LOVE</p >
         <h1>For your<br><em>special day.</em></h1>
-        <p class="intro">အမှတ်တရလေးတွေ၊ ဆုတောင်းစကားလေးတွေနဲ့<br>နှလုံးသားထဲက မွေးနေ့လက်ဆောင်လေးပါ။</p>
+        <p class="intro">အမှတ်တရလေးတွေ၊ ဆုတောင်းစကားလေးတွေနဲ့<br>နှလုံးသားထဲက မွေးနေ့လက်ဆောင်လေးပါ။</p >
         <div class="tiny-flower">✿</div>
       </div>
+
       <form id="login-form" class="glass-card">
         <div class="card-icon">♡</div>
-        <p class="eyebrow center">JUST FOR US</p>
+        <p class="eyebrow center">JUST FOR US</p >
         <h2>Welcome, lovely</h2>
-        <p class="muted center">ကိုယ်တို့နှစ်ယောက်အတွက် သီးသန့်နေရာလေး</p>
+        <p class="muted center">ကိုယ်တို့နှစ်ယောက်အတွက် သီးသန့်နေရာလေး</p >
+
         <label for="email">Email address</label>
         <input id="email" type="email" autocomplete="username" placeholder="you@example.com" required>
+
         <label for="password">Password</label>
         <input id="password" type="password" autocomplete="current-password" placeholder="Your password" required>
+
         <button class="primary-btn" type="submit">Open our little world <span>♡</span></button>
-        <p id="login-message" class="form-message" role="status" aria-live="polite"></p>
-        <p class="tiny-note"><span>🔒</span> Approved accounts only</p>
+        <p id="login-message" class="form-message" role="status" aria-live="polite"></p >
+        <p class="tiny-note">🔒 Approved accounts only</p >
       </form>
     </section>
 
     <section id="birthday-view" class="birthday-view hidden">
-      <div class="welcome-banner">
+
+      <section class="welcome-banner">
         <div>
-          <p class="eyebrow">TODAY IS ALL ABOUT YOU</p>
+          <p class="eyebrow">TODAY IS ALL ABOUT YOU</p >
           <h1>Happy Birthday,<br><em>my favourite person.</em></h1>
-          <p class="intro">ဒီနေ့လေးက ပျော်ရွှင်မှုတွေနဲ့ ပြည့်နေပါစေ။ ♡</p>
+          <p class="intro">ဒီနေ့လေးက ပျော်ရွှင်မှုတွေနဲ့ ပြည့်နေပါစေ။ ♡</p >
         </div>
-        <div class="cake-art" aria-hidden="true"><span>✿</span><div class="cake">🎂</div><span>♡</span></div>
-      </div>
+        <div class="cake-art" aria-hidden="true">
+          <span>✿</span>
+          <div class="cake">🎂</div>
+          <span>♡</span>
+        </div>
+      </section>
+
+      <section class="music-section">
+        <div class="music-decoration">♫</div>
+        <p class="eyebrow center">A SONG JUST FOR YOU</p >
+        <h2>Our little birthday melody</h2>
+        <p>ဒီသီချင်းလေးနဲ့အတူ ဒီနေ့လေးကို စတင်လိုက်ရအောင်။ ♡</p >
+        <audio id="birthday-music" src="birthday.mp3" preload="none" loop></audio>
+        <button id="music-btn" class="primary-btn music-btn" type="button">▶ Play birthday song</button>
+        <p id="music-message" class="tiny-note">သီချင်းဖွင့်ရန် Play ကိုနှိပ်ပါနော် ♡</p >
+      </section>
 
       <section class="letter-section">
-        <div class="section-heading"><span class="eyebrow">A NOTE FROM MY HEART</span><span class="line"></span></div>
+        <div class="section-heading">
+          <span class="eyebrow">A BIRTHDAY WISH FOR YOU</span>
+          <span class="line"></span>
+        </div>
+
         <article class="letter-card">
           <div class="letter-flower">❀</div>
-          <h2>To someone wonderful,</h2>
-          <p>မွေးနေ့မှာ ပျော်ရွှင်မှုတွေ အများကြီးရပါစေ။ မင်းရဲ့နေ့ရက်တိုင်းမှာ အပြုံးလေးတွေ၊ အိပ်မက်လှလှလေးတွေ၊ ချစ်ခြင်းမေတ္တာတွေနဲ့ ပြည့်နေပါစေ။</p>
-          <p>အတူတူဖန်တီးခဲ့တဲ့ အမှတ်တရလေးတွေကို တန်ဖိုးထားပါတယ်။ ရှေ့ဆက်မယ့်နေ့ရက်တွေမှာလည်း လှပတဲ့အခိုက်အတန့်လေးတွေ အများကြီးရှိပါစေ။</p>
-          <p class="signature">With all my love, <span>♡</span></p>
+          <h2>Happy Birthday, lovely ♡</h2>
+          <p>ဒီနေ့မွေးနေ့လေးမှစပြီး မရဲ့နေ့ရက်တိုင်းမှာ ပျော်ရွှင်မှုတွေ၊ အပြုံးလေးတွေနဲ့ ပြည့်နှက်နေပါစေ။ မမျှော်လင့်ထားတဲ့ ကောင်းခြင်းတွေ၊ လှပတဲ့အခွင့်အရေးတွေလည်း အများကြီး ရရှိပါစေ။</p >
+          <p>မရဲ့အိပ်မက်လေးတိုင်း တစ်ခုချင်းစီ အကောင်အထည်ဖော်နိုင်ပါစေ။ ဘယ်လိုအချိန်မျိုးမှာပဲဖြစ်ဖြစ် ကိုယ့်ကိုယ်ကို တန်ဖိုးထားပြီး ပျော်ရွှင်စွာ ရှင်သန်နိုင်ပါစေ။</p >
+          <p>ဒီနေ့လေးက မအတွက် အမှတ်တရအလှဆုံးနေ့လေးတစ်နေ့ ဖြစ်ပါစေနော်။ ♡</p >
+          <p class="signature">With all my love, <span>♡</span></p >
         </article>
       </section>
 
       <section class="gallery-section">
-        <div class="section-heading"><span class="eyebrow">OUR LITTLE MEMORIES</span><span class="line"></span></div>
-        <div class="gallery-intro"><h2>Moments to keep <em>forever.</em></h2><p>ကိုယ်တို့ရဲ့ အမှတ်တရပုံလေးတွေ</p></div>
+        <div class="section-heading">
+          <span class="eyebrow">OUR LITTLE MEMORIES</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="gallery-intro">
+          <h2>Moments to keep <em>forever.</em></h2>
+          <p>ကိုယ်တို့ရဲ့ အမှတ်တရပုံလေးတွေ</p >
+        </div>
+
+        <div class="upload-panel">
+          <label class="upload-label" for="photo-input">♡ အမှတ်တရပုံအသစ်တွေ တင်ရန်</label>
+          <input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+          <button id="upload-btn" class="primary-btn upload-btn" type="button">Upload photos ♡</button>
+          <p id="upload-status" class="form-message center" role="status"></p >
+        </div>
+
         <div id="gallery" class="gallery" aria-live="polite">
           <div class="empty-state">အမှတ်တရပုံလေးတွေကို မကြာခင် ဒီနေရာမှာ တွေ့ရမယ်နော် ♡</div>
         </div>
-        <p id="gallery-message" class="form-message center" role="status"></p>
+        <p id="gallery-message" class="form-message center" role="status"></p >
       </section>
 
       <section class="final-note">
         <div class="big-heart">♥</div>
-        <p class="eyebrow">ONE MORE THING</p>
+        <p class="eyebrow">ONE MORE THING</p >
         <h2>You make ordinary days<br><em>feel like magic.</em></h2>
-        <p>ဒီနေ့လေးလိုပဲ နေ့တိုင်း လှပပျော်ရွှင်ပါစေ။</p>
+        <p>မရှိနေလို့ လှပလာတဲ့ အမှတ်တရလေးတွေကို အမြဲတန်ဖိုးထားနေမှာပါ။</p >
+        <p>ဒီနေ့လေးလိုပဲ နေ့တိုင်း လှပပျော်ရွှင်ပါစေ။ ♡</p >
         <button id="logout-btn" class="quiet-btn" type="button">Log out safely</button>
       </section>
     </section>
+
     <footer>Made with <span>♥</span> and a little bit of magic</footer>
   </main>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="script.js"></script>
