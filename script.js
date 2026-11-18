@@ -521,4 +521,79 @@
       showQuizQuestion();
     });
   }
+    // ===== SECRET LOVE LETTER =====
+
+  const openLetterBtn = document.getElementById("open-letter-btn");
+  const letterContent = document.getElementById("secret-letter-content");
+  const loveEnvelope = document.getElementById("love-envelope");
+
+  if (openLetterBtn && letterContent) {
+    openLetterBtn.addEventListener("click", () => {
+      letterContent.classList.toggle("hidden");
+
+      if (letterContent.classList.contains("hidden")) {
+        openLetterBtn.textContent = "Open My Letter ♡";
+        loveEnvelope.textContent = "💌";
+      } else {
+        openLetterBtn.textContent = "Close My Letter ♡";
+        loveEnvelope.textContent = "💗";
+      }
+    });
+  }
+
+  // ===== WISH UPON A STAR =====
+
+  const wishInput = document.getElementById("wish-input");
+  const wishButton = document.getElementById("wish-btn");
+  const wishMessage = document.getElementById("wish-message");
+  const wishStars = document.getElementById("wish-stars");
+
+  if (wishInput && wishButton && wishMessage && wishStars) {
+    wishButton.addEventListener("click", () => {
+      const wish = wishInput.value.trim();
+
+      if (!wish) {
+        wishMessage.textContent = "ဆုတောင်းလေးတစ်ခု အရင်ရေးပေးပါနော် 💗";
+        return;
+      }
+
+      wishMessage.textContent =
+        "မရဲ့ ဆုတောင်းလေးတွေ အားလုံး ပြည့်ဝပါစေနော်။ ✨";
+
+      wishStars.textContent = "⭐ ✨ 🌟 ✨ ⭐";
+      wishButton.textContent = "Wish Made! ♡";
+      wishInput.disabled = true;
+      wishButton.disabled = true;
+    });
+  }
+
+  // ===== FLOATING HEARTS =====
+
+  const floatingHearts = document.getElementById("floating-hearts");
+
+  if (floatingHearts) {
+    const heartSymbols = ["💗", "💕", "♡", "💖", "🌸"];
+
+    function createFloatingHeart() {
+      const heart = document.createElement("span");
+
+      heart.className = "floating-heart";
+      heart.textContent =
+        heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize = (14 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+      floatingHearts.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 10000);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createFloatingHeart, i * 500);
+    }
+
+    setInterval(createFloatingHeart, 1200);
+  }
 })();
